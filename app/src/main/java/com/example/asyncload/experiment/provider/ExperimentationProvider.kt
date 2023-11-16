@@ -40,6 +40,6 @@ class ClientSDK {
     }
 
     fun decide(key: String, data: String): String {
-        return data
+        return key
     }
 }

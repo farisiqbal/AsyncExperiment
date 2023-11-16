@@ -11,7 +11,7 @@ class CustomerUserProvider @Inject constructor() {
     suspend fun fetchData() {
         // we will put this to cache
         delay(4000)
-        data.emit("VARIANT")
+        data.emit("USER_DATA")
     }
 
     // get from cache

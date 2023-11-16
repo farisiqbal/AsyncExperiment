@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import com.example.asyncload.experiment.provider.CustomerUserProvider
 import com.example.asyncload.experiment.provider.ExperimentationProvider
-import com.example.asyncload.ui.theme.AsyncLoadTheme
+import com.example.asyncload.ui.theme.Theme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,8 +38,7 @@ class MainActivity : ComponentActivity() {
         loadData()
         setContent {
             val state1 by customerUserProvider.data.collectAsState()
-//            val state2 by anotherDataProvider.data.collectAsState()
-            AsyncLoadTheme {
+            Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -85,7 +84,7 @@ fun Greeting(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    AsyncLoadTheme {
+    Theme {
         Greeting("Android")
     }
 }

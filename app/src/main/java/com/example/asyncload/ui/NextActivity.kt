@@ -10,7 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.example.asyncload.experiment.ExperimentA
-import com.example.asyncload.ui.theme.AsyncLoadTheme
+import com.example.asyncload.ui.theme.Theme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class NextActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val state by experimentA.decide().collectAsState("")
-            AsyncLoadTheme {
+            Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
