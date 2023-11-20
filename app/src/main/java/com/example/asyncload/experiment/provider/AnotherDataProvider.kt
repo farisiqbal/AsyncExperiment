@@ -15,5 +15,5 @@ class AnotherDataProvider @Inject constructor() {
     }
 
     // get from cache
-    val data: MutableStateFlow<String> = MutableStateFlow("Loading2...")
+    val data: MutableStateFlow<String> = MutableStateFlow("...")
 }

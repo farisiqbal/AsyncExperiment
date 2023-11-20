@@ -13,7 +13,10 @@ class ExperimentA @Inject constructor(
     override val key: String = "my_key"
 
     // this is executed only when it is READY
-    override suspend fun FlowCollector<String>.emitVariant() {
-        emit(experimentationProvider.decide(key, customerUserProvider.data.value))
+    override suspend fun FlowCollector<String>.makeDecision() {
+        val decision = experimentationProvider.decide(key, customerUserProvider.data.value)
+        // developer decides what they do
+        // for example: if not in exp or error emit("BAU")
+        emit(decision)
     }
 }

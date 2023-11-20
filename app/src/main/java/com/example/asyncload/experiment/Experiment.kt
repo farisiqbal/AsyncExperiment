@@ -10,23 +10,30 @@ import kotlinx.coroutines.flow.flow
 interface Experiment {
     val key: String
 
-    val isReady: Flow<Boolean>
+    fun decide(): Flow<String>
+}
 
-    fun decide() = flow {
+abstract class BaseExperiment(
+    experimentationProvider: ExperimentationProvider
+) : Experiment, Awaitable {
+
+    override val isReady: Flow<Boolean> = experimentationProvider.isReady
+
+    override fun decide() = flow {
         isReady.collect { isReady ->
             if (isReady) {
-                emitVariant()
+                makeDecision()
             }
         }
     }
 
-    suspend fun FlowCollector<String>.emitVariant()
+    abstract suspend fun FlowCollector<String>.makeDecision()
 }
 
 abstract class CustomerExperiment(
     experimentationProvider: ExperimentationProvider,
     customerUserProvider: CustomerUserProvider
-) : Experiment {
+) : BaseExperiment(experimentationProvider) {
 
     override val isReady: Flow<Boolean> = combine(
         experimentationProvider.isReady,
@@ -36,9 +43,7 @@ abstract class CustomerExperiment(
     }
 }
 
-abstract class PublicExperiment(
-    experimentationProvider: ExperimentationProvider
-) : Experiment {
+interface Awaitable {
 
-    override val isReady: Flow<Boolean> = experimentationProvider.isReady
+    val isReady: Flow<Boolean>
 }
