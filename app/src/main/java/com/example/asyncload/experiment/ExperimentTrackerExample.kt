@@ -7,13 +7,11 @@ class ExperimentTrackerExample(
     private val experimentationProvider: ExperimentationProvider,
     private val customerUserProvider: CustomerUserProvider
 ) : CustomerExperimentTracker(experimentationProvider, customerUserProvider) {
-    
+
     override val key: String = "my_tracking_key"
 
     override suspend fun sendTrackingEvent() {
         experimentationProvider.track(key, customerUserProvider.data.value, userAttrs = mapOf())
 //        experimentationProvider.track()
     }
-
-
 }
