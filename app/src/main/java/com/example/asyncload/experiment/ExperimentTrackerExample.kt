@@ -2,8 +2,9 @@ package com.example.asyncload.experiment
 
 import com.example.asyncload.experiment.provider.CustomerUserProvider
 import com.example.asyncload.experiment.provider.ExperimentationProvider
+import javax.inject.Inject
 
-class ExperimentTrackerExample(
+class ExperimentTrackerExample @Inject constructor(
     private val experimentationProvider: ExperimentationProvider,
     private val customerUserProvider: CustomerUserProvider
 ) : CustomerExperimentTracker(experimentationProvider, customerUserProvider) {

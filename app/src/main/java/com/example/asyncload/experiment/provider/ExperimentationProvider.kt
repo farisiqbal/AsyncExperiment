@@ -2,7 +2,6 @@ package com.example.asyncload.experiment.provider
 
 import com.example.asyncload.experiment.Awaitable
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 interface ExperimentationProvider : Awaitable {

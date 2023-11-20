@@ -37,7 +37,7 @@ class NextActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting(
-                        "Getting the data: ${display(state)}",
+                        "Getting the data: $state",
                         onClick = { track() }
                     )
                 }
@@ -49,6 +49,7 @@ class NextActivity : ComponentActivity() {
         lifecycleScope.launch { experimentTracker.track() }
     }
 
+    /**
     private fun display(state: String): String {
         when (state) {
             "BAU" -> {
@@ -63,4 +64,5 @@ class NextActivity : ComponentActivity() {
         }
         return "MY_DECISION"
     }
+    */
 }
