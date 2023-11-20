@@ -19,8 +19,8 @@ class ExperimentTrackerExample(
     }
 
     override suspend fun sendTrackingEvent() {
-//        experimentationProvider.track(key, "id", user_attrs = mapOf(), null)
-        experimentationProvider.track()
+        experimentationProvider.track(key, customerUserProvider.data.value, userAttrs = mapOf())
+//        experimentationProvider.track()
     }
 
 

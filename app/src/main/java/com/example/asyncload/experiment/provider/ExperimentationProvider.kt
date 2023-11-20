@@ -1,17 +1,17 @@
 package com.example.asyncload.experiment.provider
 
+import com.example.asyncload.experiment.Awaitable
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-interface ExperimentationProvider {
+interface ExperimentationProvider : Awaitable {
     // call on app launch
     suspend fun init()
 
     suspend fun decide(key: String, data: String): String
 
-    suspend fun track()
-
-    val isReady: MutableStateFlow<Boolean>
+    suspend fun track(key: String, userId: String, userAttrs: Map<String, Any>)
 }
 
 class ExperimentationProviderImpl(
@@ -28,7 +28,9 @@ class ExperimentationProviderImpl(
         return client.decide(key, data)
     }
 
-    override suspend fun track() { }
+    override suspend fun track(key: String, userId: String, userAttrs: Map<String, Any>) {
+        client.track(key, userId, userAttrs)
+    }
 
     override val isReady = MutableStateFlow(false)
 }
@@ -41,5 +43,9 @@ class ClientSDK {
 
     fun decide(key: String, data: String): String {
         return key
+    }
+
+    fun track(key: String, userId: String, userAttrs: Map<String, Any>) {
+        // do something
     }
 }
